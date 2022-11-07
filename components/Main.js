@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+import About from './About';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Container = styled.div`
     width: 100%;
     height: 100vh;
 `
+const Header = styled.div`
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+`
+const Logo = styled.div`
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+const TabBar = styled(Logo)``
 
 const Main = () => {
+    
 
     useEffect(()=>{
         
@@ -14,32 +35,35 @@ const Main = () => {
             e.preventDefault();
         },{passive : false});
     
-        var $html = $("html");
+        const $html = $("html");
+        let page = 1;
+        const lastPage = $(".content").length;
      
-        var page = 1;
-     
-        var lastPage = $(".content").length;
-     
-        $html.animate({scrollTop:0},10);
+        $html.animate({scrollTop:0}, 10);
     
     
         $(window).on("wheel", function(e){
-     
             if($html.is(":animated")) return;
-         
             if(e.originalEvent.deltaY > 0){
                 if(page== lastPage) return;
-         
                 page++;
             }else if(e.originalEvent.deltaY < 0){
                 if(page == 1) return;
-         
                 page--;
             }
-            var posTop = (page-1) * $(window).height();
-         
+            const posTop = (page-1) * $(window).height();
             $html.animate({scrollTop : posTop});
-         
+        });
+
+        $(window).bind('wheel', function(event){
+            if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
+                // scroll up
+                // console.log("스크롤 위로");
+            }
+            else {
+                // scroll down
+                // console.log("스크롤 아래로");
+            }
         });
         
     })
@@ -48,12 +72,13 @@ const Main = () => {
     const [scroll, setScroll] = useState(1);
     console.log('scroll: ', scroll);
 
-   
   return (
     <Container>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-        <div className="content"><h1>1</h1></div>
+        <Header>
+        <Logo className='text-lg text-white'>Tae-Hoon</Logo>
+        <TabBar><i className="fa-sharp fa-solid fa-bars text-3xl text-white"></i></TabBar>
+      </Header>
+        <About />
         <div className="content"><h1>2</h1></div>
         <div className="content"><h1>3</h1></div>
         <div className="content"><h1>4</h1></div>
