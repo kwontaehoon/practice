@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import About from './About';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
 
 
 const Container = styled.div`
@@ -26,8 +27,35 @@ const Logo = styled.div`
 `
 const TabBar = styled(Logo)``
 
+const Footer = styled.div`
+  border: 2px solid white;
+  height: 24.5%;
+  display: flex;
+`
+
+const CopyRight = styled.div`
+  border: 2px solid white;
+  width: 90%;
+`
+
+const PageBox = styled.div`
+  border: 2px solid white;
+  width: 10%;
+  justify-content: center;
+  align-items: center;
+
+  div{
+    font-size: 30px;
+    padding: 5px;
+  }
+`
+
 const Main = () => {
-    
+
+    const [PageNumber, setPageNumber] = useState({
+        all: 5,
+        current: 1 
+      });
 
     useEffect(()=>{
         
@@ -76,8 +104,18 @@ const Main = () => {
     <Container>
         <Header>
         <Logo className='text-lg text-white'>Tae-Hoon</Logo>
-        <TabBar><i className="fa-sharp fa-solid fa-bars text-3xl text-white"></i></TabBar>
+        <TabBar><FontAwesomeIcon icon={faBarsStaggered} /></TabBar>
       </Header>
+
+      <Footer>
+        <CopyRight></CopyRight>
+        <PageBox>
+          <div>{PageNumber.current}</div>
+          <div>*</div>
+          <div>{PageNumber.all}</div>
+        </PageBox>
+      </Footer>
+
         <About />
         <div className="content"><h1>2</h1></div>
         <div className="content"><h1>3</h1></div>
@@ -85,6 +123,8 @@ const Main = () => {
         <div className="content"><h1>5</h1></div>
         <div className="content"><h1>6</h1></div>
         <div className="content"><h1>7</h1></div>
+
+    
     </Container>
   )
 }
