@@ -6,31 +6,37 @@ import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
 
 
 const Container = styled.div`
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 `
 const Header = styled.div`
-    width: 100%;
-    height: 15%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    z-index: 999;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 999;
+  font-size: 30px;
+  border: 2px solid white;
 `
 const Logo = styled.div`
-    width: 10%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 10%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 const TabBar = styled(Logo)``
 
 const Footer = styled.div`
   border: 2px solid white;
+  width: 100%;
   height: 24.5%;
+  position: fixed;
   display: flex;
+  bottom: 0;
+  z-index: 999;
 `
 
 const CopyRight = styled.div`
@@ -40,6 +46,7 @@ const CopyRight = styled.div`
 
 const PageBox = styled.div`
   border: 2px solid white;
+  display: flex;
   width: 10%;
   justify-content: center;
   align-items: center;
