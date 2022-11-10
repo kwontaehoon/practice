@@ -4,20 +4,20 @@ import styled from 'styled-components';
 const Container = styled.div`
   background-image: url('/images/bg1.jpg');
   background-size: 100% 100%;
-  padding-top: 100px;
+  padding-top: 180px;
 `
 const Main = styled.div`
-  padding-top: 200px;
-  height: 50%;
+  height: 60%;
   border: 2px solid white;
 `
 const Box = styled.div`
   height: 33.5%;
-  font-size: 40px;
+  font-size: 50px;
   display: flex;
   align-items: center;
   padding-left: 60px;
   font-family: 'GangwonEduPowerExtraBoldA';
+  padding-top: 20px;
 `
 
 const About = () => {

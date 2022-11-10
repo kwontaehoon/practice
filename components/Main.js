@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import About from './About';
+import Page1 from './Page1';
+import Page2 from './Page2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
 
@@ -30,65 +31,111 @@ const Logo = styled.div`
 const TabBar = styled(Logo)``
 
 const Footer = styled.div`
-  border: 2px solid white;
   width: 100%;
   height: 24.5%;
   position: fixed;
   display: flex;
-  bottom: 0;
+  bottom: 30px;
   z-index: 999;
 `
 
-const CopyRight = styled.div`
+const CopyRightBox = styled.div`
   border: 2px solid white;
   width: 90%;
-`
-
-const PageBox = styled.div`
-  border: 2px solid white;
   display: flex;
-  width: 10%;
-  justify-content: center;
-  align-items: center;
-
+  align-items: flex-end;
+  padding-left: 40px;
+`
+const Box = styled.div`
+  width: 400px;
+  height: 60%;
+  display: flex;
+`
+const Subbox1 = styled.div`
+  width: 270px;
+  font-size: 14px;
+  font-weight: bold;
+`
+const Title = styled.div`
+  height: 30%;
+  padding: 10px;
+  display: flex;
+  
   div{
-    font-size: 30px;
-    padding: 5px;
+    margin-right: 15px;
   }
+`
+const Content = styled.div`
+  height: 50%;
+  padding: 10px;
+`
+const Subbox2 = styled.div`
+  width: 100px;
+  display: flex;
+  align-items: center;
+`
+const ButtonBox = styled.div`
+  width: 80%;
+  height: 45%;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 `
 
 const Main = () => {
 
-    const [PageNumber, setPageNumber] = useState({
-        all: 5,
+    const [pageNumber, setPageNumber] = useState({
+        all: 7,
         current: 1 
       });
+    console.log('current: ', pageNumber.current);
+    console.log('all: ', pageNumber.all); 
+
+    const [test, setTest] = useState(1);
+    console.log('test: ', test);
 
     useEffect(()=>{
+
+      window.addEventListener("wheel", function(e){
+        console.log('aa');
+        console.log(window.innerHeight*3);
+        window.scrollTo({ left: 500, top: window.innerHeight*3, behavior: "smooth" });
+        e.preventDefault();
+      },{passive : false});
         
-        window.addEventListener("wheel", function(e){
-            e.preventDefault();
-        },{passive : false});
+        // window.addEventListener("wheel", function(e){
+        //     e.preventDefault();
+        // },{passive : false});
     
-        const $html = $("html");
-        let page = 1;
-        const lastPage = $(".content").length;
+        // const $html = $("html");
+        // let page = 1;
+        // const lastPage = $(".content").length;
      
-        $html.animate({scrollTop:0}, 10);
+        // $html.animate({scrollTop:0}, 10);
     
     
-        $(window).on("wheel", function(e){
-            if($html.is(":animated")) return;
-            if(e.originalEvent.deltaY > 0){
-                if(page== lastPage) return;
-                page++;
-            }else if(e.originalEvent.deltaY < 0){
-                if(page == 1) return;
-                page--;
-            }
-            const posTop = (page-1) * $(window).height();
-            $html.animate({scrollTop : posTop});
-        });
+        // $(window).on("wheel", function(e){
+        //   console.log('wheel');
+
+        //     if($html.is(":animated")) return;
+        //     if(e.originalEvent.deltaY > 0){
+        //         if(page == pageNumber.all) return;
+        //         // setPageNumber(prevState => ({
+        //         //   ...prevState,
+        //         //   current: 2,
+        //         // }));
+        //         page++;
+
+        //         console.log('aa: ', pageNumber);
+        //     }else if(e.originalEvent.deltaY < 0){
+        //         if(page == 1) return;
+        //         page--;
+        //     }
+        //     const posTop = (page-1) * $(window).height();
+        //     $html.animate({scrollTop : posTop});
+        // });
 
         $(window).bind('wheel', function(event){
             if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
@@ -100,8 +147,7 @@ const Main = () => {
                 // console.log("스크롤 아래로");
             }
         });
-        
-    })
+    }, []);
     
 
     const [scroll, setScroll] = useState(1);
@@ -115,15 +161,28 @@ const Main = () => {
       </Header>
 
       <Footer>
-        <CopyRight></CopyRight>
-        <PageBox>
-          <div>{PageNumber.current}</div>
-          <div>*</div>
-          <div>{PageNumber.all}</div>
-        </PageBox>
+        <CopyRightBox>
+          <Box>
+            <Subbox1>
+              <Title>
+                <div>appknot</div>
+                <div>|</div>
+                <div>A FECT</div>
+                <div>|</div>
+                <div>A RED</div>
+              </Title>
+              <Content>
+                <div>© 2022 knotters all rights reserved.</div>
+              </Content>
+            </Subbox1>
+            <Subbox2>
+              <ButtonBox>Contaat</ButtonBox>
+            </Subbox2>
+          </Box>
+        </CopyRightBox>
       </Footer>
 
-        <About />
+        <Page1 />
         <div className="content"><h1>2</h1></div>
         <div className="content"><h1>3</h1></div>
         <div className="content"><h1>4</h1></div>
