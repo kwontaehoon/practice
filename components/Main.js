@@ -83,6 +83,14 @@ const ButtonBox = styled.div`
   justify-content: center;
   border-radius: 10px;
 `
+const PageBox = styled.div`
+  width: 10%;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+`
 
 const Main = () => {
 
@@ -91,68 +99,53 @@ const Main = () => {
         current: 1 
       });
     console.log('current: ', pageNumber.current);
-    console.log('all: ', pageNumber.all); 
-
-    const [test, setTest] = useState(1);
-    console.log('test: ', test);
+    console.log('all: ', pageNumber.all);
 
     useEffect(()=>{
 
+      console.log('맨처음 current: ', pageNumber.current);
+
       window.addEventListener("wheel", function(e){
-        console.log('aa');
-        console.log(window.innerHeight*3);
-        window.scrollTo({ left: 500, top: window.innerHeight*3, behavior: "smooth" });
-        e.preventDefault();
-      },{passive : false});
-        
-        // window.addEventListener("wheel", function(e){
-        //     e.preventDefault();
-        // },{passive : false});
-    
-        // const $html = $("html");
-        // let page = 1;
-        // const lastPage = $(".content").length;
-     
-        // $html.animate({scrollTop:0}, 10);
-    
-    
-        // $(window).on("wheel", function(e){
-        //   console.log('wheel');
 
-        //     if($html.is(":animated")) return;
-        //     if(e.originalEvent.deltaY > 0){
-        //         if(page == pageNumber.all) return;
-        //         // setPageNumber(prevState => ({
-        //         //   ...prevState,
-        //         //   current: 2,
-        //         // }));
-        //         page++;
+        console.log('처음 current: ', pageNumber.current);
 
-        //         console.log('aa: ', pageNumber);
-        //     }else if(e.originalEvent.deltaY < 0){
-        //         if(page == 1) return;
-        //         page--;
-        //     }
-        //     const posTop = (page-1) * $(window).height();
-        //     $html.animate({scrollTop : posTop});
-        // });
+        if(e.deltaY > 0){
+          console.log('내려갑니다.');
+          setPageNumber(prevState => ({
+            ...prevState,
+            current: pageNumber.current + 1,
+          }));
+          
+        }else if(e.deltaY < 0 && pageNumber.current > 0){
+          console.log('올라갑니다.');
+          setPageNumber(prevState => ({
+            ...prevState,
+            current: pageNumber.current - 1,
+          }));
+          
+        }
+        console.log(pageNumber.current);
+        console.log(window.innerHeight*pageNumber.current);
 
-        $(window).bind('wheel', function(event){
-            if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
-                // scroll up
-                // console.log("스크롤 위로");
-            }
-            else {
-                // scroll down
-                // console.log("스크롤 아래로");
-            }
-        });
-    }, []);
-    
+        window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
+        console.log('??');
+      });
+    });
 
-    const [scroll, setScroll] = useState(1);
-    console.log('scroll: ', scroll);
+    const [scroll, setScroll] = useState({
+      name: 'taehoon',
+      age: 26,
+      address: '풍무동'
+    });
+    console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
 
+
+    const func = () => {
+      setScroll(prevState => ({
+        ...prevState,
+        age: scroll.age + 1,
+      }))
+    }
   return (
     <Container>
         <Header>
@@ -176,10 +169,15 @@ const Main = () => {
               </Content>
             </Subbox1>
             <Subbox2>
-              <ButtonBox>Contaat</ButtonBox>
+              <ButtonBox onClick={func}>Contaat</ButtonBox>
             </Subbox2>
           </Box>
         </CopyRightBox>
+        <PageBox>
+          <div>{pageNumber.current}</div>
+          <div>/</div>
+          <div>{pageNumber.all}</div>
+        </PageBox>
       </Footer>
 
         <Page1 />
