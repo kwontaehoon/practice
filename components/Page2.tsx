@@ -1,34 +1,64 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
+const ani1 = keyframes`
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+`
 const Container = styled.div`
-  background-image: url('/images/bg2.png');
-  background-size: 100% 100%;
-  padding-top: 100px;
+
 `
 const Main = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/bg2.png');
+  background-size: 100% 100%;
+`
+const Main2 = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/bg2.png');
+  background-size: 100% 100%;
+  animation: ${ani1} 2s 0s;
+  animation-fill-mode: forwards;
 `
 
-const Page2 = (p2scroll: number, setP2scroll: ()=> void) => {
+interface Props {
+  p2Scroll: boolean;
+  setP2Scroll: ()=>void;
+}
+type Todo = { id: number; text: string; done: boolean };
+type Information = { name: string; description: string };
+
+const Page2 = ({p2Scroll, setP2Scroll}: Props) => {
 
   useEffect(()=>{
-    console.log()
     window.addEventListener('scroll', function(e){
-      console.log('page2 scroll');
-      setTest(test + 1);
-
+      console.log('Page2222222222222222222222');
+      e.preventDefault();
+      setP2Scroll(true);
     })
   })
 
-  const [test, setTest] = useState(1);
-  console.log(p2scroll);
+  const box1 = () => {
+    if(p2Scroll === false){
+      return (
+        <Main></Main>
+      )
+    }else{
+    return (
+        <Main2></Main2>
+      )
+    }
+  }
+
+  const [count, setCount] = useState<number>(0);
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [info, setInformation] = useState<Information | null>(null);
+
   return (
     <Container className='content'>
-      <Main>
-        {test}
-      </Main>
+      {box1()}
     </Container>
   )
 }

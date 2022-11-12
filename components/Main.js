@@ -94,22 +94,24 @@ const PageBox = styled.div`
 
 const Main = () => {
 
-    const [pageNumber, setPageNumber] = useState({
+    const [pageNumber, setPageNumber] = useState({ // 전체 페이지
         all: 7,
         current: 1,
       });
     console.log('current: ', pageNumber.current);
     console.log('all: ', pageNumber.all);
 
-    const [p2Scroll, setP2Scroll] = useState();
+    const [p2Scroll, setP2Scroll] = useState(false);
+    console.log('main p2Scroll: ', p2Scroll);
 
     useEffect(()=>{
 
       window.addEventListener("wheel", function(e){
 
         console.log('전체 page event');
+        console.log('p2Scroll: ', p2Scroll);
 
-        if(e.deltaY > 0){
+        if(e.deltaY > 0 && p2Scroll === false){
           console.log('내려갑니다.');
           setPageNumber(prevState => ({
             ...prevState,
@@ -127,7 +129,9 @@ const Main = () => {
           }));
           // console.log('a: ', window.innerHeight*(pageNumber.current-2));
           // console.log(pageNumber.current);
-          window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
+          
+            window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
+          
         }
 
       });
