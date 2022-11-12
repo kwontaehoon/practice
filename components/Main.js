@@ -96,14 +96,13 @@ const Main = () => {
 
     const [pageNumber, setPageNumber] = useState({
         all: 7,
-        current: 1 
+        current: 1,
+        direction: '',
       });
     console.log('current: ', pageNumber.current);
     console.log('all: ', pageNumber.all);
 
     useEffect(()=>{
-
-      console.log('맨처음 current: ', pageNumber.current);
 
       window.addEventListener("wheel", function(e){
 
@@ -114,23 +113,27 @@ const Main = () => {
           setPageNumber(prevState => ({
             ...prevState,
             current: pageNumber.current + 1,
+            direction: 'down',
           }));
+          console.log(window.innerHeight*pageNumber.current);
+          console.log(pageNumber.current);
+          window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
           
         }else if(e.deltaY < 0 && pageNumber.current > 0){
           console.log('올라갑니다.');
           setPageNumber(prevState => ({
             ...prevState,
             current: pageNumber.current - 1,
+            direction: 'up'
           }));
-          
+          console.log('a: ', window.innerHeight*(pageNumber.current-2));
+          console.log(pageNumber.current);
+          window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
         }
-        console.log(pageNumber.current);
-        console.log(window.innerHeight*pageNumber.current);
 
-        window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
-        console.log('??');
       });
     });
+
 
     const [scroll, setScroll] = useState({
       name: 'taehoon',
