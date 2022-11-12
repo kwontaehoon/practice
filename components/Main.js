@@ -97,37 +97,36 @@ const Main = () => {
     const [pageNumber, setPageNumber] = useState({
         all: 7,
         current: 1,
-        direction: '',
       });
     console.log('current: ', pageNumber.current);
     console.log('all: ', pageNumber.all);
+
+    const [p2Scroll, setP2Scroll] = useState();
 
     useEffect(()=>{
 
       window.addEventListener("wheel", function(e){
 
-        console.log('처음 current: ', pageNumber.current);
+        console.log('전체 page event');
 
         if(e.deltaY > 0){
           console.log('내려갑니다.');
           setPageNumber(prevState => ({
             ...prevState,
             current: pageNumber.current + 1,
-            direction: 'down',
           }));
-          console.log(window.innerHeight*pageNumber.current);
-          console.log(pageNumber.current);
+          // console.log(window.innerHeight*pageNumber.current);
+          // console.log(pageNumber.current);
           window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
           
-        }else if(e.deltaY < 0 && pageNumber.current > 0){
+        }else if(e.deltaY < 0 && pageNumber.current > 1){
           console.log('올라갑니다.');
           setPageNumber(prevState => ({
             ...prevState,
             current: pageNumber.current - 1,
-            direction: 'up'
           }));
-          console.log('a: ', window.innerHeight*(pageNumber.current-2));
-          console.log(pageNumber.current);
+          // console.log('a: ', window.innerHeight*(pageNumber.current-2));
+          // console.log(pageNumber.current);
           window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
         }
 
@@ -135,20 +134,8 @@ const Main = () => {
     });
 
 
-    const [scroll, setScroll] = useState({
-      name: 'taehoon',
-      age: 26,
-      address: '풍무동'
-    });
     console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
 
-
-    const func = () => {
-      setScroll(prevState => ({
-        ...prevState,
-        age: scroll.age + 1,
-      }))
-    }
   return (
     <Container>
         <Header>
@@ -172,7 +159,7 @@ const Main = () => {
               </Content>
             </Subbox1>
             <Subbox2>
-              <ButtonBox onClick={func}>Contaat</ButtonBox>
+              <ButtonBox>Contaat</ButtonBox>
             </Subbox2>
           </Box>
         </CopyRightBox>
@@ -183,13 +170,13 @@ const Main = () => {
         </PageBox>
       </Footer>
 
-        <Page1 />
-        <div className="content"><h1>2</h1></div>
-        <div className="content"><h1>3</h1></div>
-        <div className="content"><h1>4</h1></div>
-        <div className="content"><h1>5</h1></div>
-        <div className="content"><h1>6</h1></div>
-        <div className="content"><h1>7</h1></div>
+      <Page1 />
+      <Page2 p2Scroll={p2Scroll} setP2Scroll={setP2Scroll}/>
+      <div className="content"><h1>3</h1></div>
+      <div className="content"><h1>4</h1></div>
+      <div className="content"><h1>5</h1></div>
+      <div className="content"><h1>6</h1></div>
+      <div className="content"><h1>7</h1></div>
 
     
     </Container>

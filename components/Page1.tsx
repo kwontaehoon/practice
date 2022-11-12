@@ -8,7 +8,6 @@ const Container = styled.div`
 `
 const Main = styled.div`
   height: 60%;
-  border: 2px solid white;
 `
 const Box = styled.div`
   height: 33.5%;
