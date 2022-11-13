@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import styled, {keyframes} from 'styled-components';
 
 const ani1 = keyframes`
-  0% {opacity: 1;}
-  100% {opacity: 0;}
+  0% {transform: translate(0px)}
+  100% {transform: translate(-500px)}
 `
 const Container = styled.div`
 
@@ -23,25 +23,34 @@ const Main2 = styled.div`
   animation-fill-mode: forwards;
 `
 
-interface Props {
-  p2Scroll: boolean;
-  setP2Scroll: ()=>void;
+interface PageProps{
+  current: number;
+  all: number;
+  action: boolean;
 }
+interface PagesetProps{
+  setPageNumber: ()=>void;
+}
+
 type Todo = { id: number; text: string; done: boolean };
 type Information = { name: string; description: string };
 
-const Page2 = ({p2Scroll, setP2Scroll}: Props) => {
+const Page2 = ({pageNumber, setPageNumber}:{pageNumber: PageProps, setPageNumber: PagesetProps}) => {
 
   useEffect(()=>{
-    window.addEventListener('scroll', function(e){
-      console.log('Page2222222222222222222222');
-      e.preventDefault();
-      setP2Scroll(true);
+
+    window.addEventListener('wheel', function(e){
+      e.stopPropagation();
+      console.log('page2: ', window.innerHeight);
     })
+
+    if(pageNumber.current === 2){
+      console.log('page2 current: ', pageNumber.current);
+    }
   })
 
   const box1 = () => {
-    if(p2Scroll === false){
+    if(pageNumber.current === 2){
       return (
         <Main></Main>
       )
@@ -57,7 +66,7 @@ const Page2 = ({p2Scroll, setP2Scroll}: Props) => {
   const [info, setInformation] = useState<Information | null>(null);
 
   return (
-    <Container className='content'>
+    <Container className='content' data-rellax-speed="-3">
       {box1()}
     </Container>
   )

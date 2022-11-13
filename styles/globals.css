@@ -19,6 +19,10 @@
  
 }
 
+body::-webkit-scrollbar {
+    width: 0px;  /* 스크롤바의 너비 */
+} /* 스크롤바 없애기 */
+
 
 @font-face {
     font-family: 'GangwonEduPowerExtraBoldA';

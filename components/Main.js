@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Page1 from './Page1';
 import Page2 from './Page2';
+import Page3 from './Page3';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
 
@@ -94,24 +95,22 @@ const PageBox = styled.div`
 
 const Main = () => {
 
+
     const [pageNumber, setPageNumber] = useState({ // 전체 페이지
         all: 7,
         current: 1,
+        action: false,
       });
-    console.log('current: ', pageNumber.current);
-    console.log('all: ', pageNumber.all);
 
     const [p2Scroll, setP2Scroll] = useState(false);
-    console.log('main p2Scroll: ', p2Scroll);
 
     useEffect(()=>{
+      console.log('Main: ', window.innerHeight);
 
       window.addEventListener("wheel", function(e){
+        e.preventDefault();
 
-        console.log('전체 page event');
-        console.log('p2Scroll: ', p2Scroll);
-
-        if(e.deltaY > 0 && p2Scroll === false){
+        if(e.deltaY > 0 && pageNumber.action === false){
           console.log('내려갑니다.');
           setPageNumber(prevState => ({
             ...prevState,
@@ -119,7 +118,11 @@ const Main = () => {
           }));
           // console.log(window.innerHeight*pageNumber.current);
           // console.log(pageNumber.current);
-          window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
+          setTimeout(()=>{
+            
+            window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
+            e.preventDefault();
+          }, 500)
           
         }else if(e.deltaY < 0 && pageNumber.current > 1){
           console.log('올라갑니다.');
@@ -129,12 +132,14 @@ const Main = () => {
           }));
           // console.log('a: ', window.innerHeight*(pageNumber.current-2));
           // console.log(pageNumber.current);
-          
-            window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
-          
+
+            setTimeout(()=>{
+              window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
+              e.preventDefault();
+            }, 500)
         }
 
-      });
+      }, {passive: false});
     });
 
 
@@ -175,8 +180,8 @@ const Main = () => {
       </Footer>
 
       <Page1 />
-      <Page2 p2Scroll={p2Scroll} setP2Scroll={setP2Scroll}/>
-      <div className="content"><h1>3</h1></div>
+      <Page2 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+      <Page3 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
       <div className="content"><h1>4</h1></div>
       <div className="content"><h1>5</h1></div>
       <div className="content"><h1>6</h1></div>

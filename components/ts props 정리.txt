@@ -1,0 +1,13 @@
+props
+
+array 나 단수로 넘길때
+const Page3 = ({p2Scroll, setP2Scroll}: Props) => {
+
+}
+
+
+object 넘길때
+
+const Page2 = ({pageNumber, setPageNumber}:{pageNumber: PageProps, setPageNumber: PageProps2}) => {
+    
+}
