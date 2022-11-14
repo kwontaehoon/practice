@@ -1,13 +1,29 @@
 props
 
-array 나 단수로 넘길때
+1. array 나 단수로 넘길때
+
+interface PagenationBtnType {
+  p2Scroll: number;
+  setP2Scroll: React.Dispatch<React.SetStateAction<number>>;
+}
+
 const Page3 = ({p2Scroll, setP2Scroll}: Props) => {
 
 }
 
 
-object 넘길때
+2. object 넘길때
 
-const Page2 = ({pageNumber, setPageNumber}:{pageNumber: PageProps, setPageNumber: PageProps2}) => {
-    
+interface PageProps {
+  pageNumber:{
+    current: number;
+    all: number;
+    action: boolean;
+  }
+  setPageNumber: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Page2 = ({pageNumber, setPageNumber}: pageProps) => {
+    console.log(pageNumber);
+    setPageNumber(true);
 }

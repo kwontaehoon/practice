@@ -18,7 +18,7 @@ const Page4 = ({p2Scroll, setP2Scroll}: Props) => {
   })
   
   return (
-    <div>Page4</div>
+    <div className='content'>Page4</div>
   )
 }
 

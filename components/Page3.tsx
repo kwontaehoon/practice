@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import styled, {keyframes} from 'styled-components';
 
+const Container = styled.div`
+  background-color: black;
+`
 interface PageProps {
-  current: number;
-  all: number;
-  action: boolean;
+  pageNumber:{
+    current: number;
+    all: number;
+    action: boolean;
+  }
+  setPageNumber: React.Dispatch<React.SetStateAction<object>>
 }
-type PagesetProps = (
-  setPageNumber: React.Dispatch<React.SetStateAction<boolean>>
-) => boolean;
 
 type Todo = { id: number; text: string; done: boolean };
 type Information = { name: string; description: string };
 
-const Page3 = ({pageNumber, setPageNumber}:{pageNumber: PageProps, setPageNumber: PagesetProps}) => {
+const Page3 = ({pageNumber, setPageNumber}: PageProps) => {
 
   useEffect(()=>{
     window.addEventListener('wheel', function(e){
       e.stopPropagation();
-      console.log('page2: ', window.innerHeight);
+      // console.log('page3: ', window.innerHeight);
     })
-
-    if(pageNumber.current === 3){
-      console.log('page3 current: ', pageNumber.current);
-      setPageNumber(true);
-    }
-  })
+  });
 
   return (
-    <div>Page3</div>
+    <Container className='content'>
+
+    </Container>
   )
 }
 

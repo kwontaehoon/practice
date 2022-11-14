@@ -20,7 +20,6 @@ const Header = styled.div`
   position: fixed;
   z-index: 999;
   font-size: 30px;
-  border: 2px solid white;
 `
 const Logo = styled.div`
   width: 10%;
@@ -41,7 +40,6 @@ const Footer = styled.div`
 `
 
 const CopyRightBox = styled.div`
-  border: 2px solid white;
   width: 90%;
   display: flex;
   align-items: flex-end;
@@ -86,7 +84,6 @@ const ButtonBox = styled.div`
 `
 const PageBox = styled.div`
   width: 10%;
-  border: 1px solid white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,49 +92,51 @@ const PageBox = styled.div`
 
 const Main = () => {
 
-
+    let timeout;
     const [pageNumber, setPageNumber] = useState({ // 전체 페이지
         all: 7,
         current: 1,
         action: false,
       });
-
-    const [p2Scroll, setP2Scroll] = useState(false);
+    const [pageVisible, setPageVisible] = useState(false);
 
     useEffect(()=>{
       console.log('Main: ', window.innerHeight);
 
       window.addEventListener("wheel", function(e){
-        e.preventDefault();
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){ //다시 휠 이벤트 발생  0.1초후
 
         if(e.deltaY > 0 && pageNumber.action === false){
+
           console.log('내려갑니다.');
+          setPageVisible(true);
           setPageNumber(prevState => ({
             ...prevState,
             current: pageNumber.current + 1,
           }));
           // console.log(window.innerHeight*pageNumber.current);
           // console.log(pageNumber.current);
+          e.preventDefault();
           setTimeout(()=>{
-            
             window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
-            e.preventDefault();
           }, 500)
+
           
         }else if(e.deltaY < 0 && pageNumber.current > 1){
+          
           console.log('올라갑니다.');
           setPageNumber(prevState => ({
             ...prevState,
             current: pageNumber.current - 1,
           }));
-          // console.log('a: ', window.innerHeight*(pageNumber.current-2));
-          // console.log(pageNumber.current);
 
-            setTimeout(()=>{
-              window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
-              e.preventDefault();
-            }, 500)
+          e.preventDefault();
+          setTimeout(()=>{
+             window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
+          }, 500)
         }
+      }, 1000);
 
       }, {passive: false});
     });
@@ -146,7 +145,7 @@ const Main = () => {
     console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
 
   return (
-    <Container>
+    <Container style={{overflow: pageVisible ? 'visible' : 'hidden'}}>
         <Header>
         <Logo className='text-lg text-white'>Tae-Hoon</Logo>
         <TabBar><FontAwesomeIcon icon={faBarsStaggered} /></TabBar>
