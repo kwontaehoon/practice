@@ -5,6 +5,7 @@ const Container = styled.div`
   background-image: url('/images/bg1.jpg');
   background-size: 100% 100%;
   padding-top: 180px;
+  overflow: hidden;
 `
 const Main = styled.div`
   height: 60%;
@@ -18,11 +19,42 @@ const Box = styled.div`
   font-family: 'GangwonEduPowerExtraBoldA';
   padding-top: 20px;
 `
+interface PageProps {
+  pageNumber:{
+    current: number;
+    all: number;
+    action: boolean;
+  }
+  setPageNumber: React.Dispatch<React.SetStateAction<object>>
+}
 
-const About = () => {
-  
+type Todo = { id: number; text: string; done: boolean };
+type Information = { name: string; description: string };
+
+const Page1 = ({pageNumber, setPageNumber}: PageProps) => {
+
+  useEffect(()=>{
+
+    window.addEventListener('wheel', function(e){
+      // console.log('page1: ', window.innerHeight);
+      setTest(false);
+    })
+
+    if(pageNumber.current === 1 && pageNumber.action === false){
+      console.log('page1 else');
+      setTimeout(()=>{
+        setTest(true);
+      });
+    }else{
+      setTest(false);
+      
+    }
+  });
+
+  const [test, setTest] = useState(false);
+
   return (
-    <Container className='content'>
+    <Container className='content' style={{display: test ? 'block' : 'none'}}>
       <Main>
           <Box>D-Transformation</Box>
           <Box>Digital Marketing</Box>
@@ -32,4 +64,4 @@ const About = () => {
   )
 }
 
-export default About
+export default Page1

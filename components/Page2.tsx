@@ -6,9 +6,7 @@ const ani1 = keyframes`
   100% {transform: translate(-500px)}
 `
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  border: 3px solid white;
 `
 const Main = styled.div`
   width: 100%;
@@ -42,21 +40,23 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
   useEffect(()=>{
 
     window.addEventListener('wheel', function(e){
-      e.stopPropagation();
-      // console.log('page2: ', window.innerHeight);
+      console.log('page2');
+      console.log(pageNumber.current);
+      setTest(true);
     })
 
     if(pageNumber.current === 2 && pageNumber.action === false){
-      console.log('page2 current: ', pageNumber.current);
-      // setPageNumber(prevState => ({
-      //   ...prevState,
-      //   current: 3,
-      //   action: true,
-      // }));
+      console.log('page2 else');
+      setTimeout(()=>{
+        setTest(true);
+      }, 1000);
     }else{
-      console.log('작업해도될까요');
+      setTest(false);
+      
     }
   });
+
+  const [test, setTest] = useState(false);
 
   const box1 = () => {
     if(pageNumber.current === 2){
@@ -75,7 +75,7 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
   const [info, setInformation] = useState<Information | null>(null);
 
   return (
-    <Container className='content'>
+    <Container className='content' style={{display: test ? 'block' : 'none'}}>
       {box1()}
     </Container>
   )

@@ -19,9 +19,9 @@
  
 }
 
-body::-webkit-scrollbar {
-    width: 0px;  /* 스크롤바의 너비 */
-} /* 스크롤바 없애기 */
+/* body::-webkit-scrollbar {
+    width: 15px;  스크롤바의 너비
+}*/
 
 
 @font-face {

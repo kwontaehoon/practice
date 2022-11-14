@@ -92,60 +92,53 @@ const PageBox = styled.div`
 
 const Main = () => {
 
-    let timeout;
+  let timeout;
+
+  useEffect(()=>{
+
+    window.addEventListener("wheel", function(e){
+      clearTimeout(timeout);
+      timeout = setTimeout(function(){ //다시 휠 이벤트 발생  0.1초후
+
+        if(e.deltaY > 0){
+        console.log('내려갑니다.');
+      
+        setTimeout(()=>{
+          window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
+
+          setPageNumber(prevState => ({
+            ...prevState,
+            current: pageNumber.current + 1,
+          }));
+        }, 500)
+        
+
+        }else if(e.deltaY < 0 && pageNumber.current > 1){
+        
+        console.log('올라갑니다.');
+        setPageNumber(prevState => ({
+          ...prevState,
+          current: pageNumber.current - 1,
+        }));
+        setTimeout(()=>{
+           window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
+        }, 500)
+      }
+    }, 500);
+    
+    });
+  });
+
     const [pageNumber, setPageNumber] = useState({ // 전체 페이지
         all: 7,
         current: 1,
         action: false,
       });
-    const [pageVisible, setPageVisible] = useState(false);
-
-    useEffect(()=>{
-      console.log('Main: ', window.innerHeight);
-
-      window.addEventListener("wheel", function(e){
-        clearTimeout(timeout);
-        timeout = setTimeout(function(){ //다시 휠 이벤트 발생  0.1초후
-
-        if(e.deltaY > 0 && pageNumber.action === false){
-
-          console.log('내려갑니다.');
-          setPageVisible(true);
-          setPageNumber(prevState => ({
-            ...prevState,
-            current: pageNumber.current + 1,
-          }));
-          // console.log(window.innerHeight*pageNumber.current);
-          // console.log(pageNumber.current);
-          e.preventDefault();
-          setTimeout(()=>{
-            window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
-          }, 500)
-
-          
-        }else if(e.deltaY < 0 && pageNumber.current > 1){
-          
-          console.log('올라갑니다.');
-          setPageNumber(prevState => ({
-            ...prevState,
-            current: pageNumber.current - 1,
-          }));
-
-          e.preventDefault();
-          setTimeout(()=>{
-             window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
-          }, 500)
-        }
-      }, 1000);
-
-      }, {passive: false});
-    });
-
-
-    console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+    console.log('pageNumber current: ', pageNumber.current);
+    console.log('pageNumber.action: ', pageNumber.action);
 
   return (
-    <Container style={{overflow: pageVisible ? 'visible' : 'hidden'}}>
+    <Container>
         <Header>
         <Logo className='text-lg text-white'>Tae-Hoon</Logo>
         <TabBar><FontAwesomeIcon icon={faBarsStaggered} /></TabBar>
@@ -178,15 +171,13 @@ const Main = () => {
         </PageBox>
       </Footer>
 
-      <Page1 />
+      <Page1 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
       <Page2 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
       <Page3 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
-      <div className="content"><h1>4</h1></div>
+      {/* <div className="content"><h1>4</h1></div>
       <div className="content"><h1>5</h1></div>
       <div className="content"><h1>6</h1></div>
-      <div className="content"><h1>7</h1></div>
-
-    
+      <div className="content"><h1>7</h1></div> */}
     </Container>
   )
 }
