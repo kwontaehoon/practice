@@ -6,7 +6,8 @@ const ani1 = keyframes`
   100% {transform: translate(-500px)}
 `
 const Container = styled.div`
-  border: 3px solid white;
+  height: 100vh;
+  border: 3px solid red;
 `
 const Main = styled.div`
   width: 100%;
@@ -38,21 +39,16 @@ type Information = { name: string; description: string };
 const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
 
   useEffect(()=>{
-
     window.addEventListener('wheel', function(e){
       console.log('page2');
-      console.log(pageNumber.current);
-      setTest(true);
+      
     })
 
     if(pageNumber.current === 2 && pageNumber.action === false){
       console.log('page2 else');
-      setTimeout(()=>{
-        setTest(true);
-      }, 1000);
+
     }else{
-      setTest(false);
-      
+
     }
   });
 
@@ -75,7 +71,7 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
   const [info, setInformation] = useState<Information | null>(null);
 
   return (
-    <Container className='content' style={{display: test ? 'block' : 'none'}}>
+    <Container className='content' style={{overflow: test ? 'visible' : 'hidden'}}>
       {box1()}
     </Container>
   )

@@ -8,8 +8,7 @@ import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
 
 
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
+  
 `
 const Header = styled.div`
   width: 100%;
@@ -103,14 +102,15 @@ const Main = () => {
         if(e.deltaY > 0){
         console.log('내려갑니다.');
       
-        setTimeout(()=>{
-          window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
-
+        
           setPageNumber(prevState => ({
             ...prevState,
             current: pageNumber.current + 1,
           }));
-        }, 500)
+
+          setTimeout(()=>{
+            window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
+          }, 1000)
         
 
         }else if(e.deltaY < 0 && pageNumber.current > 1){
@@ -124,7 +124,7 @@ const Main = () => {
            window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
         }, 500)
       }
-    }, 500);
+    }, 200);
     
     });
   });

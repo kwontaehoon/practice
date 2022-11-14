@@ -5,7 +5,7 @@ const Container = styled.div`
   background-image: url('/images/bg1.jpg');
   background-size: 100% 100%;
   padding-top: 180px;
-  overflow: hidden;
+  height: 100vh;
 `
 const Main = styled.div`
   height: 60%;
@@ -37,16 +37,14 @@ const Page1 = ({pageNumber, setPageNumber}: PageProps) => {
 
     window.addEventListener('wheel', function(e){
       // console.log('page1: ', window.innerHeight);
-      setTest(false);
+
     })
 
     if(pageNumber.current === 1 && pageNumber.action === false){
       console.log('page1 else');
-      setTimeout(()=>{
-        setTest(true);
-      });
+
     }else{
-      setTest(false);
+
       
     }
   });
@@ -54,7 +52,7 @@ const Page1 = ({pageNumber, setPageNumber}: PageProps) => {
   const [test, setTest] = useState(false);
 
   return (
-    <Container className='content' style={{display: test ? 'block' : 'none'}}>
+    <Container className='content' style={{overflow: test ? 'visible' : 'hidden'}}>
       <Main>
           <Box>D-Transformation</Box>
           <Box>Digital Marketing</Box>

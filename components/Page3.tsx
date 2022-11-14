@@ -4,6 +4,7 @@ import styled, {keyframes} from 'styled-components';
 const Container = styled.div`
   background-color: black;
   border: 3px solid white;
+  height: 100vh;
 `
 interface PageProps {
   pageNumber:{
@@ -21,17 +22,14 @@ const Page3 = ({pageNumber, setPageNumber}: PageProps) => {
 
   useEffect(()=>{
     window.addEventListener('wheel', function(e){
-      // console.log('page3: ', window.innerHeight);
-      setTest(true);
+      console.log('page3');
+      
     })
 
     if(pageNumber.current === 3 && pageNumber.action === false){
+      console.log('page3 else');
 
-      setTest(true);
-      
     }else{
-      setTest(false);
-      
 
     }
   });
@@ -39,7 +37,7 @@ const Page3 = ({pageNumber, setPageNumber}: PageProps) => {
   const [test, setTest] = useState(false);
 
   return (
-    <Container className='content' style={{display: test ? 'block' : 'none'}}>
+    <Container className='content' style={{overflow: test ? 'visible' : 'hidden'}}>
 
     </Container>
   )
