@@ -4,19 +4,21 @@
 
 *{box-sizing: border-box; margin: 0; padding: 0; color: white}
  
-.content{
-	width: 100%; height: 100%;
-
-	position: relative;
-}
-.content > h1{
+.circle{
 	position: absolute;
-	top: 50%; left: 50%;
-	transform: translate(-50%,-50%);
-	font-size: 20em;
-	font-weight: bold;
-	text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
- 
+	top: 0;
+	left: 0;
+  	width: 12px;
+  	height: 12px;
+  	border-radius: 50%;
+  	background-color: white;
+  	z-index: 999;
+	transform: translate(-50%, -50%);
+	transition: 0.05s;
+}
+
+.circle:active{
+	background-color: grey;
 }
 
 /* body::-webkit-scrollbar {

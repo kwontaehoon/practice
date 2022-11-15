@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
+import Page4 from './Page4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
 import { SectionsContainer, Section } from 'react-fullpage';
@@ -18,7 +19,7 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 999;
+  z-index: 500;
   font-size: 30px;
 `
 const Logo = styled.div`
@@ -28,7 +29,8 @@ const Logo = styled.div`
   align-items: center;
   justify-content: center;
 `
-const TabBar = styled(Logo)``
+const TabBar = styled(Logo)`
+`
 
 const Footer = styled.div`
   width: 100%;
@@ -36,7 +38,7 @@ const Footer = styled.div`
   position: fixed;
   display: flex;
   bottom: 30px;
-  z-index: 999;
+  z-index: 500;
 `
 
 const CopyRightBox = styled.div`
@@ -94,11 +96,11 @@ const Main = () => {
   
   let options = {
     activeClass: 'section', // the class that is appended to the sections links
-    anchors: ['1', '2', '3'],
+    anchors: ['1', '2', '3', '4'],
+    scrollBar: false, // use the browser default scrollbar
     delay: 700, // the scroll animation speed
     navigation: false, // use dots navigatio
     verticalAlign: false // align the content of each section vertical
-    
   };
 
 
@@ -108,11 +110,29 @@ const Main = () => {
       action: false,
   });
 
+  useEffect(()=>{
+
+    const circle = document.querySelector(".circle");
+
+    window.addEventListener('mousemove', function(e){
+
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      circle.style.left = mouseX + 'px';
+      circle.style.top = mouseY + 'px';
+
+      
+    })
+  })
+  
+
   return (
     <Container>
+      <div className='circle'></div>
       <Header>
         <Logo className='text-lg text-white'>Tae-Hoon</Logo>
-        <TabBar><FontAwesomeIcon icon={faBarsStaggered} /></TabBar>
+        <TabBar><FontAwesomeIcon icon={faBarsStaggered} style={{cursor: 'pointer'}} /></TabBar>
       </Header>
 
       <Footer>
@@ -146,7 +166,7 @@ const Main = () => {
       <Section><Page1 pageNumber={pageNumber} setPageNumber={setPageNumber}/></Section>
       <Section><Page2 pageNumber={pageNumber} setPageNumber={setPageNumber}/></Section>
       <Section><Page3 pageNumber={pageNumber} setPageNumber={setPageNumber}/></Section>
-    
+      <Section><Page4 pageNumber={pageNumber} setPageNumber={setPageNumber}/></Section>
       {/* <div className="content"><h1>4</h1></div>
       <div className="content"><h1>5</h1></div>
       <div className="content"><h1>6</h1></div>

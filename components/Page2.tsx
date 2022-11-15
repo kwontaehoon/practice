@@ -6,7 +6,8 @@ const ani1 = keyframes`
   100% {transform: translate(-500px)}
 `
 const Container = styled.div`
-  border: 3px solid red;
+  height: 100%;
+  background-color: black;
 `
 const Main = styled.div`
   width: 100%;
@@ -55,7 +56,7 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
   const [info, setInformation] = useState<Information | null>(null);
 
   return (
-    <Container className='content'>
+    <Container>
       {box1()}
     </Container>
   )

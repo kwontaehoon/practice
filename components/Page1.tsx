@@ -5,6 +5,7 @@ const Container = styled.div`
   background-image: url('/images/bg1.jpg');
   background-size: 100% 100%;
   padding-top: 180px;
+  height: 100%;
 `
 const Main = styled.div`
   height: 60%;
@@ -33,7 +34,7 @@ type Information = { name: string; description: string };
 const Page1 = ({pageNumber, setPageNumber}: PageProps) => {
 
   return (
-    <Container className='content'>
+    <Container>
       <Main>
           <Box>D-Transformation</Box>
           <Box>Digital Marketing</Box>

@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import styled, {keyframes} from 'styled-components';
 
-interface Props {
-    p2Scroll: boolean;
-    setP2Scroll: ()=>void;
+const Container = styled.div`
+  height: 100%;
+  background-color: pink;
+`
+
+interface PageProps {
+  pageNumber:{
+    current: number;
+    all: number;
+    action: boolean;
+  }
+  setPageNumber: React.Dispatch<React.SetStateAction<object>>
 }
+
 type Todo = { id: number; text: string; done: boolean };
 type Information = { name: string; description: string };
 
-const Page4 = ({p2Scroll, setP2Scroll}: Props) => {
-
-  useEffect(()=>{
-        window.addEventListener('wheel', function(e){
-          e.stopPropagation();
-          console.log('Page3: ', window.innerHeight);  
-      })
-  })
+const Page4 = ({pageNumber, setPageNumber}: PageProps) => {
   
   return (
-    <div className='content'>Page4</div>
+    <Container>
+
+    </Container>
   )
 }
 

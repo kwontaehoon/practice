@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import styled, {keyframes} from 'styled-components';
 
 const Container = styled.div`
+  height: 100%;
   background-color: black;
-  border: 3px solid white;
 `
 interface PageProps {
   pageNumber:{
@@ -20,7 +20,7 @@ type Information = { name: string; description: string };
 const Page3 = ({pageNumber, setPageNumber}: PageProps) => {
 
   return (
-    <Container className='content'>
+    <Container>
 
     </Container>
   )
