@@ -6,7 +6,6 @@ const ani1 = keyframes`
   100% {transform: translate(-500px)}
 `
 const Container = styled.div`
-  height: 100vh;
   border: 3px solid red;
 `
 const Main = styled.div`
@@ -38,21 +37,6 @@ type Information = { name: string; description: string };
 
 const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
 
-  useEffect(()=>{
-    window.addEventListener('wheel', function(e){
-      console.log('page2');
-      
-    })
-
-    if(pageNumber.current === 2 && pageNumber.action === false){
-      console.log('page2 else');
-
-    }else{
-
-    }
-  });
-
-  const [test, setTest] = useState(false);
 
   const box1 = () => {
     if(pageNumber.current === 2){
@@ -71,7 +55,7 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
   const [info, setInformation] = useState<Information | null>(null);
 
   return (
-    <Container className='content' style={{overflow: test ? 'visible' : 'hidden'}}>
+    <Container className='content'>
       {box1()}
     </Container>
   )

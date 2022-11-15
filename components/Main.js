@@ -5,10 +5,11 @@ import Page2 from './Page2';
 import Page3 from './Page3';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
+import { SectionsContainer, Section } from 'react-fullpage';
 
 
 const Container = styled.div`
-  
+  border: 2px solid black;
 `
 const Header = styled.div`
   width: 100%;
@@ -90,56 +91,26 @@ const PageBox = styled.div`
 `
 
 const Main = () => {
-
-  let timeout;
-
-  useEffect(()=>{
-
-    window.addEventListener("wheel", function(e){
-      clearTimeout(timeout);
-      timeout = setTimeout(function(){ //다시 휠 이벤트 발생  0.1초후
-
-        if(e.deltaY > 0){
-        console.log('내려갑니다.');
-      
-        
-          setPageNumber(prevState => ({
-            ...prevState,
-            current: pageNumber.current + 1,
-          }));
-
-          setTimeout(()=>{
-            window.scrollTo({top: window.innerHeight*pageNumber.current, behavior: "smooth" });
-          }, 1000)
-        
-
-        }else if(e.deltaY < 0 && pageNumber.current > 1){
-        
-        console.log('올라갑니다.');
-        setPageNumber(prevState => ({
-          ...prevState,
-          current: pageNumber.current - 1,
-        }));
-        setTimeout(()=>{
-           window.scrollTo({top: window.innerHeight*(pageNumber.current-2), behavior: "smooth" });
-        }, 500)
-      }
-    }, 200);
+  
+  let options = {
+    activeClass: 'section', // the class that is appended to the sections links
+    anchors: ['1', '2', '3'],
+    delay: 700, // the scroll animation speed
+    navigation: false, // use dots navigatio
+    verticalAlign: false // align the content of each section vertical
     
-    });
-  });
+  };
 
-    const [pageNumber, setPageNumber] = useState({ // 전체 페이지
-        all: 7,
-        current: 1,
-        action: false,
-      });
-    console.log('pageNumber current: ', pageNumber.current);
-    console.log('pageNumber.action: ', pageNumber.action);
+
+  const [pageNumber, setPageNumber] = useState({ // 전체 페이지
+      all: 7,
+      current: 1,
+      action: false,
+  });
 
   return (
     <Container>
-        <Header>
+      <Header>
         <Logo className='text-lg text-white'>Tae-Hoon</Logo>
         <TabBar><FontAwesomeIcon icon={faBarsStaggered} /></TabBar>
       </Header>
@@ -170,14 +141,17 @@ const Main = () => {
           <div>{pageNumber.all}</div>
         </PageBox>
       </Footer>
-
-      <Page1 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
-      <Page2 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
-      <Page3 pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+      
+    <SectionsContainer {...options}>
+      <Section><Page1 pageNumber={pageNumber} setPageNumber={setPageNumber}/></Section>
+      <Section><Page2 pageNumber={pageNumber} setPageNumber={setPageNumber}/></Section>
+      <Section><Page3 pageNumber={pageNumber} setPageNumber={setPageNumber}/></Section>
+    
       {/* <div className="content"><h1>4</h1></div>
       <div className="content"><h1>5</h1></div>
       <div className="content"><h1>6</h1></div>
       <div className="content"><h1>7</h1></div> */}
+    </SectionsContainer>
     </Container>
   )
 }
