@@ -94,6 +94,7 @@ const PageBox = styled.div`
 `
 
 const Main = () => {
+  console.log();
   
   let options = {
     activeClass: 'section', // the class that is appended to the sections links
