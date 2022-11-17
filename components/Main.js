@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+import StartPage from './StartPage';
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
@@ -131,6 +132,7 @@ const Main = () => {
 
   return (
     <Container>
+      <StartPage />
       <div className='circle'></div>
       <Header>
         <Logo className='text-lg text-white'>Tae-Hoon</Logo>
