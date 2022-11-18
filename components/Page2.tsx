@@ -8,20 +8,15 @@ const ani1 = keyframes`
 const Container = styled.div`
   height: 100%;
   background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
-const Main = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url('/images/bg2.png');
-  background-size: 100% 100%;
-`
-const Main2 = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url('/images/bg2.png');
-  background-size: 100% 100%;
-  animation: ${ani1} 2s 0s;
-  animation-fill-mode: forwards;
+const Box = styled.div`
+  border: 1px solid white;
+  width: 90%;
+  height: 90%;
+  background-color: green;
 `
 
 interface PageProps {
@@ -38,26 +33,13 @@ type Information = { name: string; description: string };
 
 const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
 
-
-  const box1 = () => {
-    if(pageNumber.current === 2){
-      return (
-        <Main></Main>
-      )
-    }else{
-    return (
-        <Main2></Main2>
-      )
-    }
-  }
-
   const [count, setCount] = useState<number>(0);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [info, setInformation] = useState<Information | null>(null);
 
   return (
     <Container>
-      {box1()}
+      <Box></Box>
     </Container>
   )
 }

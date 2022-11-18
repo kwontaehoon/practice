@@ -31,8 +31,7 @@ const Logo = styled.div`
   align-items: center;
   justify-content: center;
 `
-const TabBar = styled(Logo)`
-`
+const TabBar = styled(Logo)``
 
 const Footer = styled.div`
   width: 100%;
@@ -42,7 +41,6 @@ const Footer = styled.div`
   bottom: 30px;
   z-index: 500;
 `
-
 const CopyRightBox = styled.div`
   width: 90%;
   display: flex;
@@ -95,7 +93,6 @@ const PageBox = styled.div`
 `
 
 const Main = () => {
-  console.log();
   
   let options = {
     activeClass: 'section', // the class that is appended to the sections links
