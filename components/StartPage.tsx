@@ -24,7 +24,10 @@ const ani2 = keyframes`
 `
 const ani3 = keyframes`
   0% { opacity: 1; }
-  100% { opacity: 0; }
+  100% { 
+    opacity: 0;
+    z-index: -100;
+  }
 `
 const Container = styled.div<{active: boolean}>`
   background-color: black;

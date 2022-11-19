@@ -75,7 +75,7 @@ const Subbox2 = styled.div`
   display: flex;
   align-items: center;
 `
-const ButtonBox = styled.div`
+const ButtonBox = styled.button`
   width: 80%;
   height: 45%;
   background-color: grey;
@@ -83,6 +83,11 @@ const ButtonBox = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+
+  &:hover{
+    background-color : skyblue;
+    color : blue;
+  }
 `
 const PageBox = styled.div`
   width: 10%;
@@ -114,23 +119,23 @@ const Main = () => {
 
     const circle = document.querySelector(".circle");
 
-    window.addEventListener('mousemove', function(e){
+    // window.addEventListener('mousemove', function(e){
 
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+    //   const mouseX = e.clientX;
+    //   const mouseY = e.clientY;
 
-      circle.style.left = mouseX + 'px';
-      circle.style.top = mouseY + 'px';
+    //   circle.style.left = mouseX + 'px';
+    //   circle.style.top = mouseY + 'px';
 
       
-    })
+    // })
   })
   
 
   return (
     <Container>
       <StartPage />
-      <div className='circle'></div>
+      {/* <div className='circle'></div> */}
       <Header>
         <Logo className='text-lg text-white'>Tae-Hoon</Logo>
         <TabBar><FontAwesomeIcon icon={faBarsStaggered} style={{cursor: 'pointer'}} /></TabBar>

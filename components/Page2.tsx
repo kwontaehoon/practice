@@ -17,6 +17,32 @@ const Box = styled.div`
   width: 90%;
   height: 90%;
   background-color: green;
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+`
+const Circle = styled.div`
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: ivory;
+  transition: 0.5s;
+`
+const SubBox = styled.div`
+  width: 200px;
+  height: 250px;
+  background-color: orange;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover > ${Circle}{
+      width: 300px;
+      height: 300px;
+  }
 `
 
 interface PageProps {
@@ -39,7 +65,14 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
 
   return (
     <Container>
-      <Box></Box>
+      <Box>
+        <SubBox>
+          <Circle />
+        </SubBox>
+        <SubBox></SubBox>
+        <SubBox></SubBox>
+        <SubBox></SubBox>
+      </Box>
     </Container>
   )
 }
