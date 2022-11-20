@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled, {keyframes} from 'styled-components';
+import styles from './button1.module.css';
 
 const ani1 = keyframes`
   0% {transform: translate(0px)}
@@ -24,13 +25,23 @@ const Box = styled.div`
 `
 const Circle = styled.div`
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: -100%;
+  right: -100%;
   background-color: ivory;
   transition: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  div{
+    background-color: aquamarine;
+    width: 100px;
+    height: 100px;
+  }
 `
 const SubBox = styled.div`
   width: 200px;
@@ -40,8 +51,10 @@ const SubBox = styled.div`
   overflow: hidden;
   
   &:hover > ${Circle}{
-      width: 300px;
-      height: 300px;
+      width: 150%;
+      height: 150%;
+      bottom: -25%;
+      right: -25%;
   }
 `
 
@@ -67,11 +80,14 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
     <Container>
       <Box>
         <SubBox>
-          <Circle />
+          <Circle>
+            <div>dd</div>
+            <div className={styles.button}></div>
+          </Circle>
         </SubBox>
-        <SubBox></SubBox>
-        <SubBox></SubBox>
-        <SubBox></SubBox>
+        <SubBox><Circle /></SubBox>
+        <SubBox><Circle /></SubBox>
+        <SubBox><Circle /></SubBox>
       </Box>
     </Container>
   )
