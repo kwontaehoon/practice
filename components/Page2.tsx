@@ -74,9 +74,18 @@ interface PageProps {
   setPageNumber: React.Dispatch<React.SetStateAction<object>>
 }
 
+interface Test {
+  test: boolean;
+  setTest: React.Dispatch<React.SetStateAction<boolean>>
+}
+interface Test2 {
+  title: string;
+  id: string;
+}
+
 type Todo = { id: number; text: string; done: boolean };
 type Information = { name: string; description: string };
-type display1 = {}
+
 
 const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
 
@@ -85,18 +94,17 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
   const [info, setInformation] = useState<Information | null>(null);
   const [display1, setDisplay1] = useState<boolean>(false);
 
+  const [test2, setTest2] = useState<Test2[]>([]);
+
   return (
     <Container>
-      <AniPage/>
+      <AniPage display1={display1} setDisplay1={setDisplay1}/>
       <Box>
         <SubBox onClick={()=>setDisplay1(!display1)}>
           <Circle><div></div></Circle>
         </SubBox>
-        <SubBox>
+        <SubBox onClick={()=>setDisplay1(!display1)}>
           <Circle><div></div></Circle>
-        </SubBox>
-        <SubBox>
-          <Circle><div>준비중</div></Circle>
         </SubBox>
         <SubBox>
           <Circle><div>준비중</div></Circle>
