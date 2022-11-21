@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import styled, {keyframes} from 'styled-components';
-import AniPage from './AniPage';
+import styled, { keyframes } from 'styled-components'
+import Main from './CSSPage/Main'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 const ani1 = keyframes`
   0% {transform: translate(0px)}
@@ -34,18 +36,15 @@ const Circle = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
-  div{
-    background-color: aquamarine;
-    width: 200px;
-    height: 200px;
-    border-radius: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: bold;
-  }
+`
+const SubCircle = styled.div`
+  background-color: aquamarine;
+  width: 200px;
+  height: 200px;
+  border-radius: 40%;
+  padding: 70px 0px 0px 40px;
+  font-size: 20px;
+  font-weight: bold;
 `
 const SubBox = styled.div`
   width: 200px;
@@ -53,16 +52,29 @@ const SubBox = styled.div`
   background-color: white;
   position: relative;
   overflow: hidden;
-  margin: 29px;
+  margin: 25px;
   box-shadow: 5px 2px 5px 2px lightgray;
   border-radius: 10px;
   
-  &:hover > ${Circle}{
-      width: 150%;
-      height: 150%;
+  /* &:hover > ${Circle}{ */
+  ${Circle}{
+      width: 100%;
+      height: 100%;
       bottom: -25%;
       right: -25%;
   }
+`
+const ContentBox = styled.div`
+  width: 90px;
+`
+const Title = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+`
+const Content = styled(Title)`
+  font-size: 16px;
 `
 
 interface PageProps {
@@ -91,20 +103,40 @@ const Page2 = ({pageNumber, setPageNumber}: PageProps) => {
 
   const [count, setCount] = useState<number>(0);
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [info, setInformation] = useState<Information | null>(null);
-  const [display1, setDisplay1] = useState<boolean>(false);
+  const [info, setInfo] = useState<number>(0); // AniPage 식별번호
+  const [display1, setDisplay1] = useState<boolean>(false); // AniPage display
 
   const [test2, setTest2] = useState<Test2[]>([]);
 
   return (
     <Container>
-      <AniPage display1={display1} setDisplay1={setDisplay1}/>
+      <Main info={info} display1={display1} setDisplay1={setDisplay1}/>
       <Box>
-        <SubBox onClick={()=>setDisplay1(!display1)}>
-          <Circle><div></div></Circle>
+        <SubBox onClick={()=>{
+          setDisplay1(!display1);
+          setInfo(1);
+          }}>
+          <Circle>
+            <SubCircle>
+              <ContentBox>
+                <Title><FontAwesomeIcon icon={faMagnifyingGlass} /></Title>
+                <Content>Button Ani</Content>
+              </ContentBox>
+            </SubCircle>
+          </Circle>
         </SubBox>
-        <SubBox onClick={()=>setDisplay1(!display1)}>
-          <Circle><div></div></Circle>
+        <SubBox onClick={()=>{
+          setDisplay1(!display1);
+          setInfo(2);
+        }}>
+        <Circle>
+            <SubCircle>
+              <ContentBox>
+                <Title><FontAwesomeIcon icon={faMagnifyingGlass} /></Title>
+                <Content>Mouse Ani</Content>
+              </ContentBox>
+            </SubCircle>
+          </Circle>
         </SubBox>
         <SubBox>
           <Circle><div>준비중</div></Circle>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Container = styled.div`
   height: 100%;
@@ -13,11 +13,15 @@ const Box = styled.div`
   height: 100px;
   cursor: pointer;
   background-color: darkgoldenrod;
-  transition: 0.5s;   
+  border: 2px solid white;
   
-  &:hover{
-    opacity: 0;
-    transition: 0.3s;    
+  button{
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+  }
+  &:focus{
+    background-color: antiquewhite;
   }
 `
 interface PageProps {
@@ -37,7 +41,7 @@ const Page3 = ({pageNumber, setPageNumber}: PageProps) => {
   return (
     <Container>
       <Box>
-
+        <button>dd</button>
       </Box>
 
     </Container>

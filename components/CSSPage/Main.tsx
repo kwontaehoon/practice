@@ -36,26 +36,23 @@ const RightBox = styled.div<{ active: boolean }>`
 `
 
 interface PageProps {
-  display1: boolean;
-  setDisplay1: React.Dispatch<React.SetStateAction<boolean>>
+    info: number;
+    display1: boolean;
+    setDisplay1: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AniPage = ({display1, setDisplay1}: PageProps) => {
+const Main = ({info, display1, setDisplay1}: PageProps) => {
 
-  useEffect(()=>{
-    console.log('AniPage: ', display1);
-    if(display1 === false){
-      setTimeout(()=>{
+    console.log('info: ', info);
 
-      }, 2000);
-    }
-  })
   return (
     <Container style={{display: display1 ? 'flex' : 'none'}} className='test'>
-      <LeftBox active={display1}></LeftBox>
+      <LeftBox active={display1}>
+        <div>MAIN</div>
+      </LeftBox>
       <RightBox active={display1}></RightBox>
     </Container>
   )
 }
 
-export default AniPage
+export default Main
