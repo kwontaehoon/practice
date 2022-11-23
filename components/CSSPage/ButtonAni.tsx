@@ -30,6 +30,8 @@ const ButtonAni = () => {
             <span className={styles.right}>Right</span> <br/>
             <span className={styles.top}>Top</span> <br/>
             <span className={styles.bottom}>Bottom</span> <br/>
+            <span className={styles.bottom}>Bottom</span> <br/>
+            <span className={styles.bottom}>Bottom</span> <br/>
             <span>ABOUT</span> <br/>
             <p className={styles.title}>ㄹㄹ</p>
         </LeftBox>
