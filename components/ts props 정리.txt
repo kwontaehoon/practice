@@ -27,3 +27,5 @@ const Page2 = ({pageNumber, setPageNumber}: pageProps) => {
     console.log(pageNumber);
     setPageNumber(true);
 }
+
+3. next js에서 sass 사용할 때 test.module.scss 확장자로 이름 짓기

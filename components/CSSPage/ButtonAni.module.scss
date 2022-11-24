@@ -13,19 +13,25 @@ $blue: blue;
         background-position: 100% 0%;
         background-size: 0% 100%;
         transition: 0.5s;
+
         &:hover{
             background-size: 100% 100%;
         }
 }
+.right{
+    @extend .span;
+}
 .left{
+    @extend .span;
     background-position: 0% 0%;
     background-size: 0% 100%;
 }
-
-.title{
-    background-color: $blue;
-}
-
 .top{
+    @extend .span;
     background-color: darkgreen;
+}
+.bottom{
+    @extend .span;
+    background-position: 100% 0%;
+    background-size: 0% 100%;
 }
